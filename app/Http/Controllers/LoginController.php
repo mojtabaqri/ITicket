@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helpers\Helper;
+use App\Http\Requests\OtpRequest;
 use App\Models\OtpToken;
 use App\Models\User;
 use Carbon\Carbon;
@@ -11,12 +13,8 @@ use Random\RandomException;
 
 class LoginController extends Controller
 {
-    /**
-     * @throws RandomException
-     */
-    public function generateOtp(Request $request){
-    }
-    public function verifyOtp(Request $request)
+    use Helper;
+    public function verifyOtp(OtpRequest $request)
     {
 
         try {
@@ -29,10 +27,9 @@ class LoginController extends Controller
             if ($otpToken && $user && Carbon::now()->lte($otpToken->expires_at) && $otpToken->token == $userToken) {
                 OtpToken::destroy($otpToken->id);
                 Auth::login($user);
-                return response()->json(['token'=>$user->createToken('authToken')->plainTextToken],200);
-
+               return $this->ShowMessage(['token'=>$user->createToken('authToken')->plainTextToken],200);
             } else {
-                return 'Invalid token or token not found';
+                return  $this->ShowMessage(['error'=>'token wrong ! authentication failed!'],403);
             }
         } catch (\Exception $e) {
             return $e->getMessage();
@@ -44,7 +41,7 @@ class LoginController extends Controller
     /**
      * @throws RandomException
      */
-    public function sendOtp(Request $request){
+    public function sendOtp(OtpRequest $request){
         try {
             $phone=$request->input('phone');
             $randToken=random_int(100000, 999999);
@@ -54,6 +51,7 @@ class LoginController extends Controller
             $otpToken->user_id=$user->id;
             $otpToken->expires_at=Carbon::now()->addSecond(60);
             $otpToken->save();
+            return  $this->ShowMessage(['message'=>"Otp Code send to $phone"],200);
 
         }
         catch (\Exception $e){
