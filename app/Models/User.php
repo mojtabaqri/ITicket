@@ -50,7 +50,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phone'
+        'phone',
+        'phone_verified_at',
+        'is_active'
     ];
 
     /**
