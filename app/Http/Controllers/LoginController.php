@@ -17,7 +17,7 @@ class LoginController extends Controller
 {
     use Helper;
 
-   
+
 
     public function verifyOtp(OtpRequest $request)
 
@@ -32,10 +32,9 @@ class LoginController extends Controller
             $otpToken = OtpToken::where('token', $userToken)->first();
             if ($otpToken && $user && Carbon::now()->lte($otpToken->expires_at) && $otpToken->token == $userToken) {
                 OtpToken::destroy($otpToken->id);
-                Auth::login($user);
                return $this->ShowMessage(['token'=>$user->createToken('authToken')->plainTextToken],200);
             } else {
-                return  $this->ShowMessage(['error'=>'token wrong ! authentication failed!'],403);
+                return  $this->ShowMessage(['error'=>'token expired or wrong ! authentication failed!'],403);
             }
         } catch (\Exception $e) {
             return $e->getMessage();
@@ -51,7 +50,9 @@ class LoginController extends Controller
         try {
             $phone=$request->input('phone');
             $randToken=random_int(100000, 999999);
-            $user=User::where('phone',$phone)->first();
+            $user = User::firstOrCreate([
+                'phone' => $phone
+            ]);
             $otpToken=new OtpToken();
             $otpToken->token=$randToken;
             $otpToken->user_id=$user->id;
