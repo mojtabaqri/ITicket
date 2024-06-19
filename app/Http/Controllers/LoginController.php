@@ -53,14 +53,21 @@ class LoginController extends Controller
             $user = User::firstOrCreate([
                 'phone' => $phone
             ]);
-            $otpToken=new OtpToken();
-            $otpToken->token=$randToken;
-            $otpToken->user_id=$user->id;
-            $otpToken->expires_at=Carbon::now()->addSecond(60);
-            $otpToken->save();
-            return  $this->ShowMessage(['message'=>"Otp Code send to $phone"],200);
+            // Check User Have Last Token Or Token Exipred OR Not
+            $lastTokenDate = $user->token()->value('expires_at'); //ممکن است کاربر توکن نداشته باشد هندل شود
+            if($lastTokenDate && Carbon::now()->lte($lastTokenDate)) {
+            return $this->ShowMessage(['message' => 'شما باید ۲ دقیقه صبر کنید تا بتوانید دوباره درخواست دهید.'], 429);
+            }
+                $otpToken = new OtpToken();
+                $otpToken->token = $randToken;
+                $otpToken->user_id = $user->id;
+                $otpToken->expires_at = Carbon::now()->addSecond(60);
+                $otpToken->save();
+                return $this->ShowMessage(['message' => "Otp Code send to $phone"], 200);
+            }
 
-        }
+
+
         catch (\Exception $e){
             return $e->getMessage();
         }
