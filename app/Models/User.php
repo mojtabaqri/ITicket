@@ -62,17 +62,25 @@ class User extends Authenticatable
      */
 
     protected $fillable = [
-        'name',
+        'National_code',
+        'is_active',
+        'phone_verified_at',
+        "phone",
+        "name",
+        "last_name",
+        'address',
         'email',
         'password',
-        'phone',
-        'phone_verified_at',
-        'is_active'
+        'ballance',
+        'email_verified_at',
+        'user_photo',
     ];
-        public function token()
-        {
-            return $this->hasMany(OtpToken::class);
-        }
+
+    public function token()
+    {
+        return $this->hasMany(OtpToken::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

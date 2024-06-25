@@ -13,5 +13,9 @@ class Timeslot extends Model
         start_slot: dateTime index
         end_slot: dateTime
     */
+    protected $fillable = [
+        'end_slot',
+        'start_slot',
+    ];
     use HasFactory;
 }

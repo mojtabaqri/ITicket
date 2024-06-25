@@ -15,4 +15,12 @@ class Booking extends Model
 
         Service_id: bigInteger foreign:Services.id*/
     use HasFactory;
+
+    protected $fillable = [
+        'status',
+        'User_id',
+        'description',
+        'Service_id',
+    ];
+
 }

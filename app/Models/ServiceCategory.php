@@ -7,14 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class ServiceCategory extends Model
 {
- /* ServiceCategory
+    /* ServiceCategory
 
-        id: id foreign:Services.service_category_id
-        name: string
-        description: bigInteger
-        parent_id: bigInteger
+           id: id foreign:Services.service_category_id
+           name: string
+           description: bigInteger
+           parent_id: bigInteger
 
-  */
-
+     */
+    protected $fillable = [
+        'name',
+        'description',
+        'parent_id',
+    ];
     use HasFactory;
 }

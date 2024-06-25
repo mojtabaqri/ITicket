@@ -7,14 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class StateLocation extends Model
 {
- /* StateLocation
+    /* StateLocation
 
-       id: id
-        state_name: string
-        lat: point
-        long: point
+          id: id
+           state_name: string
+           lat: point
+           long: point
 
-  */
+     */
+    protected $fillable = [
+        'state_name',
+        'lat',
+        'long',
 
+    ];
     use HasFactory;
 }

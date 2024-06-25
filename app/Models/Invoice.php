@@ -17,7 +17,14 @@ class Invoice extends Model
         invoice_payment_date: bigInteger
         invoice_wallet_transaction_id: bigInteger foreign:wallet_transaction.id
     */
-
+    protected $fillable = [
+        'invoice_status',
+        'invoice_amount',
+        'invoice_booking_id',
+        'invoice_user_id',
+        'invoice_payment_date',
+        'invoice_wallet_transaction_id',
+    ];
 
     use HasFactory;
 }

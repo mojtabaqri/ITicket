@@ -13,6 +13,10 @@ class Noftication extends Model
         user_id: bigInteger foreign:user.id
         notifection_message: string
     */
+    protected $fillable = [
+        'user_id',
+        'notifection_message',
 
+    ];
     use HasFactory;
 }
