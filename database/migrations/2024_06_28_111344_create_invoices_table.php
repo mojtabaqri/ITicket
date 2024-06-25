@@ -24,6 +24,8 @@ return new class extends Migration
             $table->timestamp('invoice_payment_date');
             $table->unsignedBigInteger('invoice_wallet_transaction_id');
             $table->foreign('invoice_wallet_transaction_id')->references('id')->on('wallet_transaction');
+            $table->timestamps();
+
         });
 
         Schema::enableForeignKeyConstraints();

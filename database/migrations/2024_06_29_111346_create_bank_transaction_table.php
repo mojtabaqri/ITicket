@@ -21,6 +21,8 @@ return new class extends Migration
             $table->bigInteger('transaction_amout');
             $table->enum('transaction_type', ["increase","decrease"]);
             $table->enum('transaction_method', ["gateway","manual"]);
+            $table->timestamps();
+
         });
 
         Schema::enableForeignKeyConstraints();

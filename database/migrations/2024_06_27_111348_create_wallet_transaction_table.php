@@ -23,6 +23,8 @@ return new class extends Migration
             $table->unsignedBigInteger('transaction_booking_id');
             $table->foreign('transaction_booking_id')->references('id')->on('bookings');
             $table->string('transaction_description');
+            $table->timestamps();
+
         });
 
         Schema::enableForeignKeyConstraints();
