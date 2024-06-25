@@ -11,6 +11,8 @@ class Booking extends Model
         id: id
         status: enum:"reserved","pending","canceled" index
         User_id: bigInteger foreign:user.id
+            'description'
+
         Service_id: bigInteger foreign:Services.id*/
     use HasFactory;
 }

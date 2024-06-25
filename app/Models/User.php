@@ -45,9 +45,22 @@ class User extends Authenticatable
 
     /**
      * The attributes that are mass assignable.
-     *
+     *id: id foreign:bank_transaction.user_id
+     * National_code: string:20 index
+     * is_active: boolean
+     * phone_verified_at: timestamp
+     * phone: string:30
+     * name: string:191
+     * last_name: string:191
+     * address: text
+     * email: string:191
+     * password: string
+     * ballance: bigInteger
+     * email_verified_at: timestamp
+     * user_photo: string
      * @var array<int, string>
      */
+
     protected $fillable = [
         'name',
         'email',
