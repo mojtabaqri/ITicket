@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('service_has_timeslot', function (Blueprint $table) {
+        Schema::create('service_timeslot', function (Blueprint $table) {
             $table->unsignedBigInteger('service_id');
             $table->foreign('service_id')->references('id')->on('services');
             $table->unsignedBigInteger('timeslot_id');
