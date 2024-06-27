@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('Service_id');
             $table->foreign('Service_id')->references('id')->on('services');
             $table->string('description')->nullable();
+            $table->bigInteger('qty')->default(1);
             $table->timestamps();
 
         });

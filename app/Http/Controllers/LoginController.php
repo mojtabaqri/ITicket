@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Helpers\Helper;
+use App\Http\Helpers\ApiResponser;
 use App\Http\Requests\OtpRequest;
 use App\Models\OtpToken;
 use App\Models\User;
@@ -15,10 +15,7 @@ use Spatie\Permission\Models\Role;
 
 class LoginController extends Controller
 {
-    use Helper;
-
-
-
+    use ApiResponser;
     public function verifyOtp(OtpRequest $request)
 
     {
@@ -47,6 +44,7 @@ class LoginController extends Controller
      * @throws RandomException
      */
     public function sendOtp(OtpRequest $request){
+
         try {
             $phone=$request->input('phone');
             $randToken=random_int(100000, 999999);
@@ -55,19 +53,20 @@ class LoginController extends Controller
             ]);
             // Check User Have Last Token Or Token Exipred OR Not
             $lastTokenDate = $user->token()->value('expires_at'); //ممکن است کاربر توکن نداشته باشد هندل شود
-            if($lastTokenDate && Carbon::now()->lte($lastTokenDate)) {
-            return $this->ShowMessage(['message' => 'شما باید ۲ دقیقه صبر کنید تا بتوانید دوباره درخواست دهید.'], 429);
+            if ($lastTokenDate && Carbon::now()->lte($lastTokenDate)) {
+                return $this->errorResponse("شما باید ۲ دقیقه صبر کنید تا بتوانید دوباره درخواست دهید.'", 429);
             }
                 $otpToken = new OtpToken();
                 $otpToken->token = $randToken;
                 $otpToken->user_id = $user->id;
                 $otpToken->expires_at = Carbon::now()->addSecond(60);
                 $otpToken->save();
-                return $this->ShowMessage(['message' => "Otp Code send to $phone"], 200);
+                return $this->successResponse($phone,"Otp Code Sent" ,200);
+
+
+
+
             }
-
-
-
         catch (\Exception $e){
             return $e->getMessage();
         }
