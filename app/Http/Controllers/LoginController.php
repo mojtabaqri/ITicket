@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\InsufficientBalanceException;
+use App\Exceptions\ModelNotFoundException;
 use App\Http\Helpers\ApiResponser;
 use App\Http\Requests\OtpRequest;
 use App\Models\OtpToken;
@@ -44,8 +46,7 @@ class LoginController extends Controller
      * @throws RandomException
      */
     public function sendOtp(OtpRequest $request){
-
-        try {
+         try {
             $phone=$request->input('phone');
             $randToken=random_int(100000, 999999);
             $user = User::firstOrCreate([

@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 trait ApiResponser
 {
-    protected function successResponse($data,$message, $code): JsonResponse
+
+
+    public function successResponse($data,$message, $code): JsonResponse
     {
         return response()->json(['data' => $data,'message'=>$message, 'code' => $code], $code);
     }
 
-    protected function errorResponse($message, $code): JsonResponse
+    public function errorResponse($message, $code): JsonResponse
     {
         return response()->json(['error' => $message, 'code' => $code], $code);
     }
