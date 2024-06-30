@@ -12,12 +12,12 @@ class UserController extends Controller
      */
     public function index()
     {
-
+     return 'all user';
+     //todo
     }
-
-    public function store(Request $request)
+    public function store( $request)
     {
-        //
+        //todo
     }
     public function show(User $user)
     {
