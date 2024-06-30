@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use App\Http\Helpers\ApiResponser;
 use App\Http\Helpers\PersianResponse;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,10 +35,12 @@ class Handler extends ExceptionHandler
             if($e instanceof NotFoundHttpException ) {
                 return self::errorResponse(PersianResponse::HTTP_NOT_FOUND,Response::HTTP_NOT_FOUND);
             }
-            if($e instanceof InsufficientBalanceException ) {
+             if($e instanceof InsufficientBalanceException ) {
                 return self::errorResponse($e->getMessage(),$e->getCode());
             }
-
+             if($e instanceof AuthenticationException ) {
+                 return self::errorResponse(PersianResponse::UN_AUTHENTICATED,Response::HTTP_INTERNAL_SERVER_ERROR);
+             }
             return response()->json([
                 'status' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'message' => $e->getMessage()

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Exceptions\InsufficientBalanceException;
 use App\Exceptions\ModelNotFoundException;
 use App\Http\Helpers\ApiResponser;
+use App\Http\Helpers\PersianResponse;
 use App\Http\Requests\OtpRequest;
 use App\Models\OtpToken;
+use App\Models\Service;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Random\RandomException;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends Controller
 {
@@ -21,7 +24,6 @@ class LoginController extends Controller
     public function verifyOtp(OtpRequest $request)
 
     {
-
         try {
             $userPhone = $request->input('phone');
             $userToken = $request->input('token');
@@ -29,11 +31,14 @@ class LoginController extends Controller
             $user = User::where('phone', $userPhone)->first();
             // Find the OTP token by token value
             $otpToken = OtpToken::where('token', $userToken)->first();
+
             if ($otpToken && $user && Carbon::now()->lte($otpToken->expires_at) && $otpToken->token == $userToken) {
                 OtpToken::destroy($otpToken->id);
-               return $this->ShowMessage(['token'=>$user->createToken('authToken')->plainTextToken],200);
+                $user->phone_verified_at=Carbon::now();
+                $user->save();
+               return $this->successResponse(['token'=>$user->createToken('authToken')->plainTextToken],PersianResponse::AUTHENTICATED,200);
             } else {
-                return  $this->ShowMessage(['error'=>'token expired or wrong ! authentication failed!'],403);
+                return $this->errorResponse(PersianResponse::UN_AUTHENTICATED,Response::HTTP_INTERNAL_SERVER_ERROR);
             }
         } catch (\Exception $e) {
             return $e->getMessage();
@@ -46,6 +51,7 @@ class LoginController extends Controller
      * @throws RandomException
      */
     public function sendOtp(OtpRequest $request){
+
          try {
             $phone=$request->input('phone');
             $randToken=random_int(100000, 999999);

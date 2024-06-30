@@ -23,25 +23,6 @@ trait ApiResponser
         return response()->json(['error' => $message, 'code' => $code], $code);
     }
 
-    protected function showAll(Collection $collection, $code = 200): JsonResponse
-    {
-        //todo write Resource
-
-        return $this->successResponse($collection, $code);
-    }
-
-    protected function showOne(Model $instance, $code = 200): JsonResponse
-    {
-
-      //todo write Resource
-        return $this->successResponse($instance, $code);
-    }
-
-    protected function showMessage($message, $code = 200): JsonResponse
-    {
-        return $this->successResponse(['data' => $message], $code);
-    }
-
     protected function paginate(Collection $collection): LengthAwarePaginator
     {
         $rules = [
