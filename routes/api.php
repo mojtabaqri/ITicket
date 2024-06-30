@@ -16,6 +16,9 @@ Route::prefix('otp')->group(function () {
     Route::post('/verifyOtp',[LoginController::class,'verifyOtp']);
 });
 
+
+//-----******************************************- Start Admin Routes***********************************
+
 //user management routes
 Route::name('admin.user')->middleware(['auth:api'])->prefix('user')->group(function () {
     Route::get('/',[UserController::class,'index']); //show all yser
@@ -54,6 +57,21 @@ Route::name('admin.statelocation')->middleware(['auth:api'])->prefix('location')
 });
 
 
-//---------------------------------------------- End Admin Routes
+//Bank Transaction Routes ( Reports , manual Transaction )
+
+//booking (manual Booking / report  /
+
+//invoice ( report invoice )
+
+//Notifection Routes
+
+//Review Management  (acept review / review  report )
+
+//time slot managements
+
+//wallet transactions (report)
+
+
+//-----******************************************- End Admin Routes***********************************
 
 
