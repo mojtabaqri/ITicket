@@ -21,56 +21,54 @@ Route::prefix('otp')->group(function () {
 
 //user management routes
 Route::name('admin.user')->middleware(['auth:api'])->prefix('user')->group(function () {
-    Route::get('/',[UserController::class,'index']); //show all yser
-    Route::get('/{user}',[UserController::class,'show']); //show one user
-    Route::delete('/{user}',[UserController::class,'destroy']); //delete one user
-    Route::post('/{user}',[UserController::class,'store']); //save new  user
-    Route::put('/{user}',[UserController::class,'update']); //update one user
+    Route::resource('user',UserController::class);
+
 });
 
 //Service management routes
 Route::name('admin.services')->middleware(['auth:api'])->prefix('service')->group(function () {
-    Route::get('/',[ServiceController::class,'index']); //show all service
-    Route::get('/{service}',[ServiceController::class,'show']); //show one service
-    Route::delete('/{service}',[ServiceController::class,'destroy']); //delete one service
-    Route::post('/{service}',[ServiceController::class,'store']); //save new  service
-    Route::put('/{service}',[ServiceController::class,'update']); //update one service
+    Route::resource('service',ServiceController::class);
 });
-
 
 //Service  Category  management routes
 Route::name('admin.services.category')->middleware(['auth:api'])->prefix('service-cat')->group(function () {
-    Route::get('/',[ServiceCategoryController::class,'index']); //show all services category
-    Route::get('/{service-cat}',[ServiceCategoryController::class,'show']); //show one services category
-    Route::delete('/{service-cat}',[ServiceCategoryController::class,'destroy']); //delete services category
-    Route::post('/{service-cat}',[ServiceCategoryController::class,'store']); //save new  services category
-    Route::put('/{service-cat}',[ServiceCategoryController::class,'update']); //update one services category
+    Route::resource('service-cat',ServiceCategoryController::class);
 });
 
 //State Location Management   routes
 Route::name('admin.statelocation')->middleware(['auth:api'])->prefix('location')->group(function () {
-    Route::get('/',[StateLocationController::class,'index']); //show all location
-    Route::get('/{location}',[StateLocationController::class,'show']); //show one  location
-    Route::delete('/{location}',[StateLocationController::class,'destroy']); //delete one location
-    Route::post('/{location}',[StateLocationController::class,'store']); //save new  location
-    Route::put('/{location}',[StateLocationController::class,'update']); //update one location
+    Route::resource('location',StateLocationController::class);
 });
 
 
-//Bank Transaction Routes ( Reports , manual Transaction )
+//Bank Transaction Routes ( Reports , manual Transaction )//wallet transaction routs and bank transaction routes
+Route::name('admin.Transaction')->middleware(['auth:api'])->prefix('transaction')->group(function () {
+});
 
 //booking (manual Booking / report  /
+Route::name('admin.booking')->middleware(['auth:api'])->prefix('booking')->group(function () {
+
+});
 
 //invoice ( report invoice )
+Route::name('admin.invoice')->middleware(['auth:api'])->prefix('invoice')->group(function () {
+
+});
 
 //Notifection Routes
+Route::name('admin.notifection')->middleware(['auth:api'])->prefix('notifection')->group(function () {
+
+});
 
 //Review Management  (acept review / review  report )
+Route::name('admin.review')->middleware(['auth:api'])->prefix('review')->group(function () {
 
+});
 //time slot managements
+Route::name('admin.timeslot')->middleware(['auth:api'])->prefix('timeslot')->group(function () {
 
-//wallet transactions (report)
-
+});
+ 
 
 //-----******************************************- End Admin Routes***********************************
 
