@@ -7,6 +7,7 @@ use App\Http\Helpers\PersianResponse;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\UnauthorizedException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
@@ -26,13 +27,10 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    /**
-     * Register the exception handling callbacks for the application.
-     */
     public function register(): void
     {
         $this->renderable(function (Throwable $e) {
-            if($e instanceof NotFoundHttpException ) {
+             if($e instanceof NotFoundHttpException ) {
                 return self::errorResponse(PersianResponse::HTTP_NOT_FOUND,Response::HTTP_NOT_FOUND);
             }
              if($e instanceof InsufficientBalanceException ) {

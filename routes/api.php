@@ -20,23 +20,23 @@ Route::prefix('otp')->group(function () {
 //-----******************************************- Start Admin Routes***********************************
 
 //user management routes
-Route::name('admin.user')->middleware(['auth:api'])->group(function () {
+Route::name('admin.user')->group(function () {
     Route::resource('user',UserController::class)->except(['edit','create']);
 
 });
 
 //Service management routes
-Route::name('admin.services')->middleware(['auth:api'])->group(function () {
+Route::name('admin.services')->group(function () {
     Route::resource('service',ServiceController::class)->except(['edit','create']);
 });
 
 //Service  Category  management routes
-Route::name('admin.services.category')->middleware(['auth:api'])->group(function () {
+Route::name('admin.services.category')->group(function () {
     Route::resource('service-cat',ServiceCategoryController::class)->except(['edit','create']);
 });
 
 //State Location Management   routes
-Route::name('admin.statelocation')->middleware(['auth:api'])->group(function () {
+Route::name('admin.statelocation')->group(function () {
     Route::resource('location',StateLocationController::class)->except(['edit','create']);
 });
 

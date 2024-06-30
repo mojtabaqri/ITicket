@@ -17,20 +17,24 @@ class UserController extends Controller
     }
     public function store( $request)
     {
+        return 'store user';
         //todo
     }
     public function show(User $user)
     {
-        return $user;
+        return 'show specific user';
+        //todo
     }
 
     public function update(Request $request, string $id)
     {
-        //
+        return 'update specific user';
+        //todo
     }
 
-    public function destroy(string $id)
+    public function destroy(User $id)
     {
-        //
+        return 'delete specific user';
+        //todo
     }
 }
