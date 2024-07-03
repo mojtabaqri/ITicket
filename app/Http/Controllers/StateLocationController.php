@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class StateLocationController extends Controller
+class StateLocationController extends ApiController
 {
     /**
      * Display a listing of the resource.

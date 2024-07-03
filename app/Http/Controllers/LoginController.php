@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\InsufficientBalanceException;
-use App\Exceptions\ModelNotFoundException;
-use App\Http\Helpers\ApiResponser;
+ use App\Http\Helpers\ApiResponser;
 use App\Http\Helpers\PersianResponse;
 use App\Http\Requests\OtpRequest;
 use App\Models\OtpToken;

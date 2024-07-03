@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\UnauthorizedException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -37,9 +38,12 @@ class Handler extends ExceptionHandler
                 return self::errorResponse($e->getMessage(),$e->getCode());
             }
              if($e instanceof AuthenticationException ) {
-                 return self::errorResponse(PersianResponse::UN_AUTHENTICATED,Response::HTTP_INTERNAL_SERVER_ERROR);
+                 return self::errorResponse(PersianResponse::UN_AUTHENTICATED,Response::HTTP_UNAUTHORIZED);
              }
-            return response()->json([
+             if($e instanceof AccessDeniedHttpException){
+                 return self::errorResponse(PersianResponse::ACCESS_DENIED,Response::HTTP_UNAUTHORIZED);
+             }
+             return response()->json([
                 'status' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'message' => $e->getMessage()
             ], Response::HTTP_INTERNAL_SERVER_ERROR);

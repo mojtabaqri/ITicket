@@ -18,7 +18,7 @@ class Service extends Model
            service_status: enum:"active","not_active","pending"
      */
     protected $fillable = [
-        'service_category_id',
+        'service_category',
         'Service_state_location_id',
         'service_name',
         'service_price',

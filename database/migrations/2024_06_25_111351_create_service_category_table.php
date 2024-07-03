@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name',191);
             $table->string('description');
             $table->unsignedBigInteger('parent_id');
+            $table->timestamps();
+
         });
 
         Schema::enableForeignKeyConstraints();

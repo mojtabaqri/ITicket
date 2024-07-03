@@ -9,4 +9,9 @@ class PersianResponse
     public const UN_AUTHENTICATED = "عدم احراز هویت!";
     public const AUTHENTICATED = "احراز هویت موفق بود";
 
+    public const SAVE_SUCCESS = 'با موفقیت ذخیره شد !';
+    public const SAVE_FAILED = 'عملیات انجام نشد! ';
+    public const ACCESS_DENIED = 'شما مجاز به انجام این عملیات نیستید!';
+
+
 }

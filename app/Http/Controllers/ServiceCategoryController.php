@@ -11,7 +11,7 @@ class ServiceCategoryController extends ApiController
      */
     public function index()
     {
-        return 'srecu';
+       
     }
 
     /**

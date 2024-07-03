@@ -20,9 +20,11 @@ return new class extends Migration
             $table->foreign('Service_state_location_id')->references('id')->on('state_location');
             $table->string('service_name');
             $table->bigInteger('service_price');
-            $table->text('service_description');
-            $table->string('service_banner');
+            $table->text('service_description')->nullable();
+            $table->string('service_banner')->nullable();
             $table->enum('service_status', ["active","not_active","pending"]);
+            $table->timestamps();
+
         });
 
         Schema::enableForeignKeyConstraints();

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TimeSlotController extends Controller
+class TimeSlotController extends ApiController
 {
     /**
      * Display a listing of the resource.
