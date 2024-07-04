@@ -13,8 +13,8 @@ class BankTransaction extends Model
            trackingHash: string
            user_id: bigInteger
            transaction_amout: bigInteger
-           transaction_type: enum:"increase","decrease"
-           transaction_method: enum:"gateway","manual"
+           transaction_type: Enums:"increase","decrease"
+           transaction_method: Enums:"gateway","manual"
 
      */
     protected $fillable = [

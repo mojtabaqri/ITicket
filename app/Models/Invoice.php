@@ -10,7 +10,7 @@ class Invoice extends Model
     /*
     Invoice:
         id: id
-        invoice_status: enum:"Paid","unpaid"
+        invoice_status: Enums:"Paid","unpaid"
         invoice_amount: bigInteger
         invoice_booking_id: bigInteger foreign:Bookings.id
         invoice_user_id: bigInteger foreign:user.id

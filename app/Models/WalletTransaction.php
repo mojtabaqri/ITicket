@@ -13,7 +13,7 @@ class WalletTransaction extends Model
            trackingHash: string
            user_id: bigInteger foreign:user.id
            transaction_amout: bigInteger
-           transaction_type: enum:"increase","decrease"
+           transaction_type: Enums:"increase","decrease"
            transaction_booking_id: bigInteger foreign:Bookings.id
            transaction_description: bigInteger
 

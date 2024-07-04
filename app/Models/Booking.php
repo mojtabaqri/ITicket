@@ -9,7 +9,7 @@ class Booking extends Model
 {
     /*     Booking:
         id: id
-        status: enum:"reserved","pending","canceled" index
+        status: Enums:"reserved","pending","canceled" index
         User_id: bigInteger foreign:user.id
             'description'
 

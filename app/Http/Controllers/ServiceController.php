@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Helpers\PersianResponse;
 use App\Http\Requests\Service\ServiceRequest;
+use App\Http\Resources\Service\ServiceResource;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Throwable;
@@ -13,7 +14,8 @@ class ServiceController extends ApiController
 
     public function index()
     {
-        //
+        return  Service::find(1)->category()->get();
+//
     }
 
     public function store(ServiceRequest $request)
@@ -28,10 +30,9 @@ class ServiceController extends ApiController
                 $service->service_banner = $bannerPath;
             }
             $service->save();
-            return $this->successResponse($service,PersianResponse::SAVE_SUCCESS,201);
+            return $this->successResponse(new ServiceResource($service),PersianResponse::SAVE_SUCCESS,201);
 
         } catch (\Exception $e) {
-            return $e->getMessage();
             return $this->errorResponse(PersianResponse::SAVE_FAILED,500);
         }
     }

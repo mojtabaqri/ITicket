@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Service extends Model
 {
@@ -15,7 +16,7 @@ class Service extends Model
            service_price: bigInteger
            service_description: text
            service_banner: string
-           service_status: enum:"active","not_active","pending"
+           service_status: Enums:"active","not_active","pending"
      */
     protected $fillable = [
         'service_category',
@@ -27,4 +28,10 @@ class Service extends Model
         'service_status',
     ];
     use HasFactory;
+
+    public function category(): HasMany
+    {
+        return $this->hasMany(ServiceCategory::class,'parent_id');
+    }
+
 }

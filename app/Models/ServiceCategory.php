@@ -4,9 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ServiceCategory extends Model
 {
+    protected $table='service_category';
+    use HasFactory;
+
     /* ServiceCategory
 
            id: id foreign:Services.service_category_id
@@ -20,5 +25,14 @@ class ServiceCategory extends Model
         'description',
         'parent_id',
     ];
-    use HasFactory;
+
+    public function services (): BelongsTo
+    {
+        return $this->belongsTo(Service::class,'parent_id');
+    }
+
+
+
+
+
 }
