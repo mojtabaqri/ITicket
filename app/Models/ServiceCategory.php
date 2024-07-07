@@ -31,7 +31,17 @@ class ServiceCategory extends Model
         return $this->belongsTo(Service::class,'parent_id');
     }
 
+    // رابطه برای گرفتن دسته‌های فرزند
+    public function children(): HasMany
+    {
+        return $this->hasMany(ServiceCategory::class, 'parent_id');
+    }
 
+    // رابطه برای گرفتن دسته‌ی والد
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(ServiceCategory::class, 'parent_id');
+    }
 
 
 

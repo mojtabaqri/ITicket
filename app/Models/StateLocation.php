@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StateLocation extends Model
 {
+    protected $table="state_location";
     /* StateLocation
 
           id: id
@@ -22,4 +23,9 @@ class StateLocation extends Model
 
     ];
     use HasFactory;
+
+    public function service(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Service::class);
+    }
 }

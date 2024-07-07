@@ -15,10 +15,11 @@ class ServiceCategoryResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'categoryId'=>$this->id,
           'categoryName'=>$this->name,
           'categoryDescription'=>$this->description,
-//          'categoryParent' => new ServiceCategoryResource($this->whenLoaded('parent')),
-//            'categoryChildren' => ServiceCategoryResource::collection($this->whenLoaded('children')),
+          'categoryParent' => new ServiceCategoryResource($this->whenLoaded('parent')),
+          'categoryChildren' => ServiceCategoryResource::collection($this->whenLoaded('children')),
         ];
     }
 }

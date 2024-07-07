@@ -33,5 +33,9 @@ class Service extends Model
     {
         return $this->hasMany(ServiceCategory::class,'parent_id');
     }
+    public function location(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(StateLocation::class,'id');
+    }
 
 }

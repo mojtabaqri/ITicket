@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Helpers\PersianResponse;
 use App\Http\Requests\Service\ServiceRequest;
+use App\Http\Resources\Service\ServiceCategoryResource;
 use App\Http\Resources\Service\ServiceResource;
 use App\Models\Service;
+use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
 use Throwable;
 
@@ -14,14 +16,13 @@ class ServiceController extends ApiController
 
     public function index()
     {
-        return  Service::find(1)->category()->get();
+  return new ServiceResource(Service::with('category')->findOrFail(1));
+//       return Service::find(1)->location()->get();
 //
     }
 
     public function store(ServiceRequest $request)
     {
-
-
         try {
             $service = new Service();
             $service->fill($request->validated());
