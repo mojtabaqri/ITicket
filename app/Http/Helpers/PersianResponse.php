@@ -12,6 +12,6 @@ class PersianResponse
     public const SAVE_SUCCESS = 'با موفقیت ذخیره شد !';
     public const SAVE_FAILED = 'عملیات انجام نشد! ';
     public const ACCESS_DENIED = 'شما مجاز به انجام این عملیات نیستید!';
-
+    public const SUCCESS_WORK= 'با موفقیت انجام شد ';
 
 }

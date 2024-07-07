@@ -16,8 +16,6 @@ class ServiceController extends ApiController
 
     public function index()
     {
-  return new ServiceResource(Service::with('category')->findOrFail(1));
-//       return Service::find(1)->location()->get();
 //
     }
 
@@ -38,9 +36,10 @@ class ServiceController extends ApiController
         }
     }
 
-    public function show(string $id)
+    public function show(Service $service)
     {
-        //
+    return $this->successResponse(new ServiceResource($service->load('category')),PersianResponse::SUCCESS_WORK,200);
+
     }
 
     public function update(ServiceRequest $request, string $id)
